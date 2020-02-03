@@ -136,13 +136,12 @@ int main() {
         }
 
 
-
         //user redo operation:
         printf("Do you want to translate a new word?(Y/N): ");
         scanf(" %c", &redo);
         //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
         while (redo != 'y' && redo != 'Y' && redo != 'n' && redo != 'N') {
-            printf("Sorry, we don't understand you, please enter y or n. ");
+            printf("Sorry, we don't understand you, please only enter one word. y(means yes) or n(means no). ");
             scanf(" %c", &redo);
         }
         if (redo == 'n' || redo == 'N') {
