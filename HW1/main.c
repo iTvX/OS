@@ -135,12 +135,13 @@ int main() {
             printf("I'm sorry! We have no %s to %s translation at this moment\n", sourceLang, destinationLang);
         }
 
+
+
+        //user redo operation:
         printf("Do you want to translate a new word?(Y/N): ");
         scanf(" %c", &redo);
-
-
         while (redo != 'y' && redo != 'Y' && redo != 'n' && redo != 'N') {
-            printf("Do you want to translate a new word?(Y/N): ");
+            printf("Sorry, we don't understand you, please enter y or n. ");
             scanf(" %c", &redo);
         }
         if (redo == 'n' || redo == 'N') {
