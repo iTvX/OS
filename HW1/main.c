@@ -18,7 +18,7 @@
 
 
 //store vocabulary
-char *ES[tableRow][tableColumn] = {
+char *esTable[tableRow][tableColumn] = {
         {"cat",    "gato"},
         {"dog",    "perro"},
         {"bird",   "pajaro"},
@@ -29,7 +29,7 @@ char *ES[tableRow][tableColumn] = {
         {"monkey", "mono"}
 };
 
-char *EF[tableRow][tableColumn] = {
+char *efTable[tableRow][tableColumn] = {
         {"cat",    "chat"},
         {"dog",    "chian"},
         {"bird",   "oiseau"},
@@ -121,13 +121,13 @@ int main() {
 
 
         if (strcmp(sourceLang, "english") == 0 && strcmp(destinationLang, "spanish") == 0) {
-            trans_ES(userInput, ES);
+            trans_ES(userInput, esTable);
         } else if (strcmp(sourceLang, "spanish") == 0 && strcmp(destinationLang, "english") == 0) {
-            trans_SE(userInput, ES);
+            trans_SE(userInput, esTable);
         } else if (strcmp(sourceLang, "english") == 0 && strcmp(destinationLang, "french") == 0) {
-            trans_EF(userInput, EF);
+            trans_EF(userInput, efTable);
         } else if (strcmp(sourceLang, "french") == 0 && strcmp(destinationLang, "english") == 0) {
-            trans_FE(userInput, EF);
+            trans_FE(userInput, efTable);
         }
 
         //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
