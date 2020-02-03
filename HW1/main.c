@@ -137,7 +137,7 @@ int main() {
 
 
         //user redo operation:
-        printf("Do you want to translate a new word?(Y/N): ");
+        printf("Do you want to translate a new word?(Y/N, only enter one word): ");
         scanf(" %c", &redo);
         //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
         while (redo != 'y' && redo != 'Y' && redo != 'n' && redo != 'N') {
