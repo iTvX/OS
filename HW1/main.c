@@ -94,7 +94,7 @@ int main() {
     char userInput[100];
     char sourceLang[100];
     char destinationLang[100];
-    char ch;
+    char redo;
     while (1) {
 
         printf("Please enter a word to translate: ");
@@ -136,14 +136,14 @@ int main() {
         }
 
         printf("Do you want to translate a new word?(Y/N): ");
-        scanf(" %c", &ch);
+        scanf(" %c", &redo);
 
 
-        while (ch != 'y' && ch != 'Y' && ch != 'n' && ch != 'N') {
+        while (redo != 'y' && redo != 'Y' && redo != 'n' && redo != 'N') {
             printf("Do you want to translate a new word?(Y/N): ");
-            scanf(" %c", &ch);
+            scanf(" %c", &redo);
         }
-        if (ch == 'n' || ch == 'N') {
+        if (redo == 'n' || redo == 'N') {
             break;
         }
     }
