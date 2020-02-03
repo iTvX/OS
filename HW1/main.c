@@ -103,7 +103,7 @@ int main() {
         printf("Please enter the destination language: ");
         scanf("%s", destinationLang);
 
-        //Extra credit part: implement to program case insensitive, user can use either capital letter or lower case letter.
+        //Extra credit part 1: implement to program case insensitive, user can use either capital letter or lower case letter.
         int i;
         for(i = 0; i < sizeof(userInput); i++)
             userInput[i] = tolower(userInput[i]);
@@ -127,8 +127,9 @@ int main() {
             trans_FE(userInput, EF);
         }
 
+        //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
         else {
-            printf("%s to %s traslation is out of bound of this application.\n", sourceLang, destinationLang);
+            printf("%s to %s translation is out of bound of this application.\n", sourceLang, destinationLang);
         }
 
         printf("Do you want to translate a new word?(Y/N): ");
