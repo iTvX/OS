@@ -91,17 +91,17 @@ void trans_FE(char userInput[], char *EF[][tableColumn]) {
 //main function begin
 int main() {
 
-    char userInput[100], srcLang[100], dstLang[100], ch;
+    char userInput[100], sourceLang[100], destinationLang[100], ch;
     while (1) {
 
         printf("Please enter a word to translate: ");
         scanf("%s", userInput);
 
         printf("Please enter the source language: ");
-        scanf("%s", srcLang);
+        scanf("%s", sourceLang);
 
         printf("Please enter the destination language: ");
-        scanf("%s", dstLang);
+        scanf("%s", destinationLang);
 
         //Extra credit part: implement to program case insensitive, user can use either capital letter or lower case letter.
         int i;
@@ -110,30 +110,31 @@ int main() {
 
 
         for(i = 0; i < sizeof(userInput); i++)
-            srcLang[i] = tolower(srcLang[i]);
+            sourceLang[i] = tolower(sourceLang[i]);
 
 
         for(i = 0; i < sizeof(userInput); i++)
-            dstLang[i] = tolower(dstLang[i]);
+            destinationLang[i] = tolower(destinationLang[i]);
 
 
-        if (strcmp(srcLang, "english") == 0 && strcmp(dstLang, "spanish") == 0) {
+        if (strcmp(sourceLang, "english") == 0 && strcmp(destinationLang, "spanish") == 0) {
             trans_ES(userInput, ES);
-        } else if (strcmp(srcLang, "spanish") == 0 && strcmp(dstLang, "english") == 0) {
+        } else if (strcmp(sourceLang, "spanish") == 0 && strcmp(destinationLang, "english") == 0) {
             trans_SE(userInput, ES);
-        } else if (strcmp(srcLang, "english") == 0 && strcmp(dstLang, "french") == 0) {
+        } else if (strcmp(sourceLang, "english") == 0 && strcmp(destinationLang, "french") == 0) {
             trans_EF(userInput, EF);
-        } else if (strcmp(srcLang, "french") == 0 && strcmp(dstLang, "english") == 0) {
+        } else if (strcmp(sourceLang, "french") == 0 && strcmp(destinationLang, "english") == 0) {
             trans_FE(userInput, EF);
         }
 
         else {
-            printf("%s to %s traslation is out of bound of this application.\n", srcLang, dstLang);
+            printf("%s to %s traslation is out of bound of this application.\n", sourceLang, destinationLang);
         }
 
         printf("Do you want to translate a new word?(Y/N): ");
         scanf(" %c", &ch);
-        //Error check in choice
+
+
         while (ch != 'y' && ch != 'Y' && ch != 'n' && ch != 'N') {
             printf("Do you want to translate a new word?(Y/N): ");
             scanf(" %c", &ch);
