@@ -132,7 +132,7 @@ int main() {
 
         //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
         else {
-            printf("%s to %s translation is out of bound of this application.\n", sourceLang, destinationLang);
+            printf("I'm sorry! We have no %s to %s translation at this moment\n", sourceLang, destinationLang);
         }
 
         printf("Do you want to translate a new word?(Y/N): ");
