@@ -91,7 +91,10 @@ void trans_FE(char userInput[], char *EF[][tableColumn]) {
 //main function begin
 int main() {
 
-    char userInput[100], sourceLang[100], destinationLang[100], ch;
+    char userInput[100];
+    char sourceLang[100];
+    char destinationLang[100];
+    char ch;
     while (1) {
 
         printf("Please enter a word to translate: ");
