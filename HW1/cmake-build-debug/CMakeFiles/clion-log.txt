@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/zijieyu/Desktop/OS/HW1
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/zijieyu/Desktop/HW1
 -- The C compiler identification is AppleClang 11.0.0.11000033
 -- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc
 -- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc -- works
@@ -8,4 +8,4 @@
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/zijieyu/Desktop/OS/HW1/cmake-build-debug
+-- Build files have been written to: /Users/zijieyu/Desktop/HW1/cmake-build-debug

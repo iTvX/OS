@@ -1,3 +1,3 @@
-/Users/zijieyu/Desktop/OS/HW1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/zijieyu/Desktop/OS/HW1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/zijieyu/Desktop/OS/HW1/cmake-build-debug/CMakeFiles/HW1.dir
+/Users/zijieyu/Desktop/HW1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/zijieyu/Desktop/HW1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/zijieyu/Desktop/HW1/cmake-build-debug/CMakeFiles/HW1.dir

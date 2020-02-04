@@ -130,7 +130,7 @@ int main() {
             trans_FE(userInput, efTable);
         }
 
-        //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
+            //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
         else {
             printf("I'm sorry! We have no %s to %s translation at this moment\n", sourceLang, destinationLang);
         }
