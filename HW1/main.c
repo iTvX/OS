@@ -1,6 +1,8 @@
 /* Program Author: Zijie Yu
  * Date: 02/02/2020
  *
+ * Extra credit part finished.
+ *
  * Reference:
  * https://stackoverflow.com/questions/8004237/how-do-i-properly-compare-strings
  *For the reference above, I found how do I properly compare strings. So, in my code, I used strcmp() function to compare each word.
