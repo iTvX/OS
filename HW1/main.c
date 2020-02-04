@@ -57,34 +57,37 @@ void trans_ES(char userInput[], char *ES[][tableColumn]) {
 }
 
 void trans_SE(char userInput[], char *ES[][tableColumn]) {
-    int i;
-    for (i = 0; i < tableRow; i++) {
+    int i=0;
+    while (i < tableRow) {
         if (strcmp(ES[i][1], userInput) == 0) {
             printf("%s is an Spanish word that translate as %s in English.\n", userInput, ES[i][0]);
             return;
         }
+        i++;
     }
     printf("%s is an Spanish word that has no English translation present in dictionary\n", userInput);
 }
 
 void trans_EF(char userInput[], char *EF[][tableColumn]) {
-    int i;
-    for (i = 0; i < tableRow; i++) {
+    int i = 0;
+    while (i < tableRow) {
         if (strcmp(EF[i][0], userInput) == 0) {
             printf("%s is an English word that translate as %s in French.\n", userInput, EF[i][1]);
             return;
         }
+        i++;
     }
     printf("%s is an English word that has no French translation present in dictionary\n", userInput);
 }
 
 void trans_FE(char userInput[], char *EF[][tableColumn]) {
-    int i;
-    for (i = 0; i < tableRow; i++) {
+    int i = 0;
+    while (i < tableRow) {
         if (strcmp(EF[i][1], userInput) == 0) {
             printf("%s is an French word that translate as %s in English.\n", userInput, EF[i][0]);
             return;
         }
+        i++;
     }
     printf("%s is an French word that has no English translation present in dictionary\n", userInput);
 }
