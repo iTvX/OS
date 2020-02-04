@@ -45,12 +45,13 @@ char *efTable[tableRow][tableColumn] = {
 
 //function group
 void trans_ES(char userInput[], char *ES[][tableColumn]) {
-    int i;
-    for (i = 0; i < tableRow; i++) {
+    int i = 0;
+    while (i < tableRow) {
         if (strcmp(ES[i][0], userInput) == 0) {
             printf("%s is an English word that translate as %s in Spanish.\n", userInput, ES[i][1]);
             return;
         }
+        i++;
     }
     printf("%s is an English word that has no Spanish translation present in dictionary\n", userInput);
 }
