@@ -43,8 +43,7 @@ char *efTable[tableRow][tableColumn] = {
 };
 
 //Crate Translation function.
-
- void trans_ES(char userInput[], char *ES[][tableColumn]) {
+void trans_ES(char userInput[], char *ES[][tableColumn]) {
     int i = 0;
     while (i < tableRow) {
         //check the first column if can find user's input
@@ -57,8 +56,9 @@ char *efTable[tableRow][tableColumn] = {
     printf("%s is an English word that has no Spanish translation present in dictionary\n", userInput);
 }
 
+//same, but check the second column.
 void trans_SE(char userInput[], char *ES[][tableColumn]) {
-    int i=0;
+    int i = 0;
     while (i < tableRow) {
         if (strcmp(ES[i][1], userInput) == 0) {
             printf("%s is an Spanish word that translate as %s in English.\n", userInput, ES[i][0]);
@@ -100,6 +100,7 @@ int main() {
     char sourceLang[100];
     char destinationLang[100];
     char redo;
+    //Since I found C language doesn't have "true", so I use "1".
     while (1) {
 
         printf("Please enter a word to translate: ");
@@ -113,15 +114,15 @@ int main() {
 
         //Extra credit part 1: implement to program case insensitive, user can use either capital letter or lower case letter.
         int i;
-        for(i = 0; i < sizeof(userInput); i++)
+        for (i = 0; i < sizeof(userInput); i++)
             userInput[i] = tolower(userInput[i]);
 
 
-        for(i = 0; i < sizeof(userInput); i++)
+        for (i = 0; i < sizeof(userInput); i++)
             sourceLang[i] = tolower(sourceLang[i]);
 
 
-        for(i = 0; i < sizeof(userInput); i++)
+        for (i = 0; i < sizeof(userInput); i++)
             destinationLang[i] = tolower(destinationLang[i]);
 
 //check user's input to find use which language translation and table.
@@ -146,7 +147,7 @@ int main() {
         scanf(" %c", &redo);
         //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
         while (redo != 'y' && redo != 'Y' && redo != 'n' && redo != 'N') {
-            printf("Sorry, we don't understand you, please only enter one word. y(means yes) or n(means no). ");
+            printf("Sorry, we don't understand you, please only enter one word. y(means yes) or n(means no): ");
             scanf(" %c", &redo);
         }
         if (redo == 'n' || redo == 'N') {
