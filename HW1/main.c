@@ -151,7 +151,8 @@ int main() {
         for (i = 0; i < sizeof(redo); i++)
             redo[i] = tolower(redo[i]);
         //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
-        while (redo[0] != 'y' && redo[0] != 'n') {
+        //if user input is not y or n or more than 1 char, the program will show error message.
+        while (redo[0] != 'y' && redo[0] != 'n' && redo[1] != '\0') {
             printf("Sorry, we don't understand you, please only enter one word. y(means yes) or n(means no): ");
             scanf(" %s", redo);
         }
