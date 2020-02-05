@@ -14,7 +14,7 @@
 #include<string.h>
 #include <ctype.h>
 
-//set the global variable. Each row for the table is 8 and and each column is 2.
+//After I checked the given table, each row for the table is 8 and and each column is 2.
 #define tableRow 8
 #define tableColumn 2
 
@@ -42,13 +42,12 @@ char *efTable[tableRow][tableColumn] = {
         {"monkey", "singe"}
 };
 
+//Crate Translation function.
 
-
-
-//function group
-void trans_ES(char userInput[], char *ES[][tableColumn]) {
+ void trans_ES(char userInput[], char *ES[][tableColumn]) {
     int i = 0;
     while (i < tableRow) {
+        //check the first column if can find user's input
         if (strcmp(ES[i][0], userInput) == 0) {
             printf("%s is an English word that translate as %s in Spanish.\n", userInput, ES[i][1]);
             return;
@@ -96,7 +95,7 @@ void trans_FE(char userInput[], char *EF[][tableColumn]) {
 
 //main function begin
 int main() {
-
+//create user input char
     char userInput[100];
     char sourceLang[100];
     char destinationLang[100];
@@ -125,7 +124,7 @@ int main() {
         for(i = 0; i < sizeof(userInput); i++)
             destinationLang[i] = tolower(destinationLang[i]);
 
-
+//check user's input to find use which language translation and table.
         if (strcmp(sourceLang, "english") == 0 && strcmp(destinationLang, "spanish") == 0) {
             trans_ES(userInput, esTable);
         } else if (strcmp(sourceLang, "spanish") == 0 && strcmp(destinationLang, "english") == 0) {
