@@ -99,7 +99,7 @@ int main() {
     char userInput[100];
     char sourceLang[100];
     char destinationLang[100];
-    char redo;
+    char redo[100];
     //Since I found C language doesn't have "true", so I use "1".
     while (1) {
 
@@ -125,6 +125,8 @@ int main() {
         for (i = 0; i < sizeof(userInput); i++)
             destinationLang[i] = tolower(destinationLang[i]);
 
+
+
 //check user's input to find use which language translation and table.
         if (strcmp(sourceLang, "english") == 0 && strcmp(destinationLang, "spanish") == 0) {
             trans_ES(userInput, esTable);
@@ -144,15 +146,16 @@ int main() {
 
         //user redo operation:
         printf("Do you want to translate a new word?(Y/N, only enter one word): ");
-        scanf(" %c", &redo);
+        scanf(" %s", redo);
         //change all char to the lowercase.
-        redo = tolower(redo);
+        for (i = 0; i < sizeof(redo); i++)
+            redo[i] = tolower(redo[i]);
         //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
-        while (redo != 'y' && redo != 'n') {
+        while (redo[0] != 'y' && redo[0] != 'n') {
             printf("Sorry, we don't understand you, please only enter one word. y(means yes) or n(means no): ");
-            scanf(" %c", &redo);
+            scanf(" %s", redo);
         }
-        if (redo == 'n' ) {
+        if (redo[0] == 'n') {
             break;
         }
     }
