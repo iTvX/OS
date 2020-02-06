@@ -1,7 +1,7 @@
 /* Program Author: Zijie Yu
  * Date: 02/02/2020
  *
- * Extra credit part finished.
+ * 2 Extra credit part (5%) finished.
  *
  * Reference:
  * https://stackoverflow.com/questions/8004237/how-do-i-properly-compare-strings
@@ -151,11 +151,13 @@ int main() {
         for (i = 0; i < sizeof(redo); i++)
             redo[i] = tolower(redo[i]);
         //extra credit part 2: "Handling misspellings or words that are not in the dictionary".
-        //if user input is not y or n or more than 1 char, the program will show error message.
+        //if user input is y or n, the program will continue. If user input is not  y or n or more than 1 char,
+        //the program will show the error message.
         while (redo[0] != 'y' && redo[0] != 'n' && redo[1] != '\0') {
             printf("Sorry, we don't understand you, please only enter one word. y(means yes) or n(means no): ");
             scanf(" %s", redo);
         }
+        //if user input is N or n, the program would break.
         if (redo[0] == 'n') {
             break;
         }
