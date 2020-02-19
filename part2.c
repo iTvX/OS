@@ -6,16 +6,15 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-int main(void)
-{
+int main(void) {
     pid_t pid = fork();
 
     if (pid > 0) {
+        printf("Welcome to use my shell \n");
         wait(NULL);
-        execl("./part1", "output", NULL);
 
     } else {
-        printf("Welcome to use my shell \n");
+        execl("./part1", "output", NULL);
     }
 
     return 0;
