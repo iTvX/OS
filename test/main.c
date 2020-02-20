@@ -1,6 +1,6 @@
 /* Name: Zijie Yu
  *
- * This code is modify version of my part 1 code.
+ * This code is the modify version of my part 1 code.
  *
  * I used readline, if you want to run this program, you must install readline first:
  * sudo apt-get install libreadline-dev
@@ -11,7 +11,7 @@
  * reference:
  * https://indradhanush.github.io/blog/writing-a-unix-shell-part-2/
  * Since this is my first time to program a linux shell, I got no idea how to do it, I choose use readline to program my shell.
- * I got idea from above link and use partial algorithm: how to handle user input and takes a string as the input.
+ * I got an idea from above link and use partial algorithm: how to handle user input and takes a string as the input.
  * */
 
 
@@ -144,7 +144,7 @@ int main() {
     if(p1 > 0) {
         printf("Parent process");
     } else if (p1 < 0) {
-        printf("something went wrong");
+        printf("Something went wrong");
     }else {
         while (1) {
             input = readline("Translator> ");
