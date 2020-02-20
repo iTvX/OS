@@ -133,8 +133,8 @@ char **userInput(char *input){
 }
 
 //main function begin
-int main(){
-
+int main()
+{
     //create user input char
     char *input;
     char **command;
@@ -143,39 +143,37 @@ int main(){
     //Since I found C language doesn't have "true", so I use "1".
     p1 = fork();
 
-    if (p1 == 0){
-
-        while (1){
-
+    if(p1 > 0)
+    {
+        printf("Parent process");
+    } else if (p1 < 0) {
+        printf("something went wrong");
+    }else {
+        while (1) {
             input = readline("Translator> ");
             command = userInput(input);
 
-            if (strcmp(command[0], "trans_ES") == 0){
-
+            if (strcmp(command[0], "trans_ES") == 0) {
                 trans_ES(command[1], esTable);
             }
-            else if (strcmp(command[0], "trans_SE") == 0){
-
+            else if (strcmp(command[0], "trans_SE") == 0) {
                 trans_SE(command[1], esTable);
             }
-            else if (strcmp(command[0], "trans_EF") == 0){
-
+            else if (strcmp(command[0], "trans_EF") == 0) {
                 trans_EF(command[1], efTable);
             }
-            else if (strcmp(command[0], "trans_FE") == 0){
-
+            else if (strcmp(command[0], "trans_FE") == 0) {
                 trans_FE(command[1], efTable);
             }
-            else if (strcmp(command[0], "exit") == 0){
-
+            else if (strcmp(command[0], "exit") == 0) {
                 exit(0);
             }
-            else{
-
+            else {
                 printf("Command issued not recognised.\n");
             }
         }
     }
+    // parent process wait.
     wait(NULL);
     return 0;
 }
