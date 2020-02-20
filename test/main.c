@@ -1,19 +1,17 @@
 /* Name: Zijie Yu
  *
- * This code is modify version of part 1.
+ * This code is modify version of my part 1 code.
  *
  * I used readline, if you want to run this program, you must install readline first:
- *
  * sudo apt-get install libreadline-dev
  *
+ * how to run?
+ * gcc part1.c -lreadline -o part1; ./part1
+ *
  * reference:
- * Linux distribution ( #include <readline/readline.h>)
- *
- * https://stackoverflow.com/questions/56158738/address-out-of-bounds-in-c-problems-with-making-an-ls-command
- * Since this is my first time to program a shell, I have no idea how to do it, so I used readline to program my shell.
- * I got idea from above link and use partial algorithm: how to handle user input.
- *
- *
+ * https://indradhanush.github.io/blog/writing-a-unix-shell-part-2/
+ * Since this is my first time to program a linux shell, I got no idea how to do it, I choose use readline to program my shell.
+ * I got idea from above link and use partial algorithm: how to handle user input and takes a string as the input.
  * */
 
 
@@ -21,9 +19,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <readline/readline.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <readline/readline.h>
 
 //After I checked the given table, each row for the table is 8 and and each column is 2.
 #define tableRow 8
