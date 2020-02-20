@@ -120,8 +120,7 @@ char **userInput(char *input){
     int index = 0;
 
     parsed = strtok(input, separator);
-    while (parsed != NULL)
-    {
+    while (parsed != NULL){
         command[index] = parsed;
         index++;
 
@@ -133,8 +132,7 @@ char **userInput(char *input){
 }
 
 //main function begin
-int main()
-{
+int main() {
     //create user input char
     char *input;
     char **command;
@@ -143,8 +141,7 @@ int main()
     //Since I found C language doesn't have "true", so I use "1".
     p1 = fork();
 
-    if(p1 > 0)
-    {
+    if(p1 > 0) {
         printf("Parent process");
     } else if (p1 < 0) {
         printf("something went wrong");
@@ -152,7 +149,6 @@ int main()
         while (1) {
             input = readline("Translator> ");
             command = userInput(input);
-
             if (strcmp(command[0], "trans_ES") == 0) {
                 trans_ES(command[1], esTable);
             }
@@ -169,7 +165,7 @@ int main()
                 exit(0);
             }
             else {
-                printf("Command issued not recognised.\n");
+                printf("We can't find this command.\n");
             }
         }
     }
