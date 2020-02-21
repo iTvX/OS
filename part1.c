@@ -142,7 +142,8 @@ int main() {
     p1 = fork();
 
     if(p1 > 0) {
-        printf("Parent process");
+        wait(NULL);
+        printf("Thanks for using! \n");
     } else if (p1 < 0) {
         printf("Something went wrong");
     }else {
