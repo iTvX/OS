@@ -44,6 +44,7 @@ char *trans_ES(char userInput[], char *ES[][tableColumn]) {
         i++;
     }
     printf("%s is an English word that has no Spanish translation present in dictionary\n", userInput);
+    return NULL;
 }
 
 //same, but check the second column.
@@ -56,6 +57,7 @@ char *trans_SE(char userInput[], char *ES[][tableColumn]) {
         i++;
     }
     printf("%s is an Spanish word that has no English translation present in dictionary\n", userInput);
+    return NULL;
 }
 
 char *trans_EF(char userInput[], char *EF[][tableColumn]) {
@@ -67,6 +69,7 @@ char *trans_EF(char userInput[], char *EF[][tableColumn]) {
         i++;
     }
     printf("%s is an English word that has no French translation present in dictionary\n", userInput);
+    return NULL;
 }
 
 char *trans_FE(char userInput[], char *EF[][tableColumn]) {
@@ -78,6 +81,7 @@ char *trans_FE(char userInput[], char *EF[][tableColumn]) {
         i++;
     }
     printf("%s is an French word that has no English translation present in dictionary\n", userInput);
+    return NULL;
 }
 
 // read the command from the shell.
@@ -102,22 +106,20 @@ char **take_input(char *input) {
 int main() {
     //create user input char
     char *input;
-    char **command;
-    char *toEng;
-    
+    char **command = NULL;
+    char *toEng = NULL;
+
     int fd1[2]; // Pipe to send data from parent to child
     int fd2[2]; // pipe to send data from child to parent
 
-    if (pipe(fd1)==-1) 
-    { 
-        fprintf(stderr, "Pipe Failed" ); 
-        return 1; 
-    } 
-    if (pipe(fd2)==-1) 
-    { 
-        fprintf(stderr, "Pipe Failed" ); 
-        return 1; 
-    } 
+    if (pipe(fd1) == -1) {
+        fprintf(stderr, "Pipe Failed");
+        return 1;
+    }
+    if (pipe(fd2) == -1) {
+        fprintf(stderr, "Pipe Failed");
+        return 1;
+    }
 
     pid_t p1;
 
@@ -126,7 +128,7 @@ int main() {
         if (p1 > 0) {
             input = readline("Translator> ");
             command = take_input(input);
-            char *toTrans;
+            char *toTrans = NULL;
 
             if (strcmp(command[0], "trans_SF") == 0) {
                 toEng = trans_SE(command[1], esTable);
@@ -167,26 +169,21 @@ int main() {
             // child process
         else {
             close(fd1[1]);
-            char *toTrans;
+            char *toTrans = NULL;
             read(fd1[0], toTrans, 100);
 
-            if (strcmp(command[0], "trans_FS")) {
+            if (strcmp(command[0], "trans_FS") == 0)  {
                 toTrans = trans_ES(toEng, esTable);
             }
-            if (strcmp(command[0], "trans_SF")) {
+            if (strcmp(command[0], "trans_SF") == 0) {
                 toTrans = trans_EF(toEng, efTable);
             }
 
             close(fd1[0]);
             close(fd2[0]);
-
             write(fd2[1], toTrans, strlen(toTrans) + 1);
             close(fd2[1]);
-
             exit(0);
         }
     }
-    wait(NULL);
-    wait(NULL);
-    return 0;
 }
