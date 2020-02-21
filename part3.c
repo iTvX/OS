@@ -138,10 +138,26 @@ int main()
         toEng = trans_SE(command[1], esTable);
         toTrans = trans_EF(toEng, efTable);
       }
-      else if (strcmp(command[0], "trans_FS"))
+      else if (strcmp(command[0], "trans_FS") == 0)
       {
         toEng = trans_FE(command[1], efTable);
-        toTrans = trans_EF(toEng, efTable);
+        toTrans = trans_EF(toEng, esTable);
+      }
+      else if (strcmp(command[0], "trans_ES") == 0)
+      {
+        toTrans = trans_ES(command[1], esTable);
+      }
+      else if (strcmp(command[0], "trans_SE") == 0)
+      {
+        toTrans = trans_SE(command[1], esTable);
+      }
+      else if (strcmp(command[0], "trans_EF") == 0)
+      {
+        toTrans = trans_EF(command[1], efTable);
+      }
+      else if (strcmp(command[0], "trans_FE") == 0)
+      {
+        toTrans = trans_FE(command[1], efTable);
       }
       else if (strcmp(command[0], "exit") == 0)
       {
@@ -149,7 +165,7 @@ int main()
       }
       else
       {
-        printf("Command issued not recognised.\n");
+        printf("Commmand not recognised.\n");
       }
 
       close(fd1[0]); // close reading end of the first pipe
@@ -162,7 +178,11 @@ int main()
       close(fd2[1]); // close writing end of the second pipe
 
       read(fd2[0], toTrans, 100);
-      printf("%s\n", toTrans);
+      if (toTrans[0] != '\0')
+      {
+        printf("%s\n", toTrans);
+      }
+
       close(fd2[0]);
     }
     // child process
