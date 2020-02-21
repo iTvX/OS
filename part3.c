@@ -1,3 +1,5 @@
+//  Please read README.pdf before you run.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -102,9 +104,20 @@ int main() {
     char *input;
     char **command;
     char *toEng;
-
+    
     int fd1[2]; // Pipe to send data from parent to child
     int fd2[2]; // pipe to send data from child to parent
+
+    if (pipe(fd1)==-1) 
+    { 
+        fprintf(stderr, "Pipe Failed" ); 
+        return 1; 
+    } 
+    if (pipe(fd2)==-1) 
+    { 
+        fprintf(stderr, "Pipe Failed" ); 
+        return 1; 
+    } 
 
     pid_t p1;
 

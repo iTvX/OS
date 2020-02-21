@@ -1,5 +1,6 @@
 /* Name: Zijie Yu
  *
+ * Please read README.pdf before you run.
  * This code is the modify version of my part 1 code.
  *
  * I used readline, if you want to run this program, you must install readline first:
@@ -138,7 +139,6 @@ int main() {
     char **command;
 
     pid_t p1;
-    //Since I found C language doesn't have "true", so I use "1".
     p1 = fork();
 
     if(p1 > 0) {
