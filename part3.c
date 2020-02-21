@@ -107,7 +107,7 @@ int main() {
     //create user input char
     char *input;
     char **command = NULL;
-    char *toEng = NULL;
+    char *toEng;
 
     int fd1[2]; // Pipe to send data from parent to child
     int fd2[2]; // pipe to send data from child to parent
