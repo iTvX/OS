@@ -43,8 +43,7 @@ public class JavaSudokuValidator {
 
             // Check if numbers 1-9 only appear once in the row
             boolean[] validityArray = new boolean[9];
-            int i;
-            for (i = 0; i < 9; i++) {
+            for (int i = 0; i < 9; i++) {
                 // If the corresponding index for the number is set to 1, and the number is encountered again,
                 // the valid array will not be updated and the thread will exit.
                 int num = sudoku[row][i];
