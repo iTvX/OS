@@ -25,17 +25,6 @@ public class JavaSudokuValidator {
     // Array that worker threads will update
     private static boolean[] valid;
 
-    // General object that will be extended by worker thread objects, only contains
-    // the row and column relevant to the thread
-    public static class RowColumnObject {
-        int row;
-        int col;
-        RowColumnObject(int row, int column) {
-            this.row = row;
-            this.col = column;
-        }
-    }
-
     // Runnable object that determines if numbers 1-9 only appear once in a row
     public static class IsRowValid implements Runnable {
         int row;
