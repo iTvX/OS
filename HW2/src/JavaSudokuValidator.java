@@ -11,9 +11,6 @@
  */
 
 public class JavaSudokuValidator {
-    // Global constant for number of threads
-    private static final int NUM_THREADS = 27;
-    // Sudoku puzzle solution to validate
     private static final int[][] sudoku = {
             {6, 2, 4, 5, 3, 9, 1, 8, 7},
             {5, 1, 9, 7, 2, 8, 6, 3, 4},
@@ -135,6 +132,8 @@ public class JavaSudokuValidator {
     }
 
     public static void main(String[] args) {
+        //Since we totally have 27 threads (9 * 3 = 27)
+        int NUM_THREADS = 27;
         valid = new boolean[NUM_THREADS];
         Thread[] threads = new Thread[NUM_THREADS];
         int threadIndex = 0;
