@@ -37,9 +37,12 @@ public class JavaSudokuValidator {
     }
 
     // Runnable object that determines if numbers 1-9 only appear once in a row
-    public static class IsRowValid extends RowColumnObject implements Runnable {
+    public static class IsRowValid implements Runnable {
+        int row;
+        int col;
         IsRowValid(int row, int column) {
-            super(row, column);
+            this.row = row;
+            this.col = column;
         }
 
         @Override
@@ -69,9 +72,12 @@ public class JavaSudokuValidator {
     }
 
     // Runnable object that determines if numbers 1-9 only appear once in a column
-    public static class IsColumnValid extends RowColumnObject implements Runnable {
+    public static class IsColumnValid implements Runnable {
+        int row;
+        int col;
         IsColumnValid(int row, int column) {
-            super(row, column);
+            this.row = row;
+            this.col = column;
         }
 
         @Override
