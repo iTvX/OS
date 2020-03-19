@@ -106,9 +106,12 @@ public class JavaSudokuValidator {
     }
 
     // Runnable object that determines if numbers 1-9 only appear once in a 3x3 subsection
-    public static class Is3x3Valid extends RowColumnObject implements Runnable {
+    public static class Is3x3Valid implements Runnable {
+        int row;
+        int col;
         Is3x3Valid(int row, int column) {
-            super(row, column);
+            this.row = row;
+            this.col = column;
         }
 
         @Override
