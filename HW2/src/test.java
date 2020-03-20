@@ -24,12 +24,6 @@ public class test {
 
         @Override
         public void run() {
-            // Confirm valid parameters
-            if (row > 6 || row % 3 != 0 || col > 6 || col % 3 != 0) {
-                System.out.println("Invalid row or column for subsection!");
-                return;
-            }
-           
             int sum = 0;
             int product = 1;
             for (int i = row; i < row + 3; i++) {
