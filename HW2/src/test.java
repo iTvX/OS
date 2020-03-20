@@ -35,19 +35,15 @@ public class test {
             if (sum == 45 && product == 362880 ) {
                 isValid[row + col/3] = true;
             }
-            // If reached this point, 3x3 subsection is valid.
-             // Maps the subsection to an index in the first 8 indices of the valid array
         }
     }
 
     public static void main(String[] args) {
-        //Since we totally have 27 threads (9 * 3 = 27)
         int NUM_THREADS = 9;
         isValid = new boolean[NUM_THREADS];
         Thread[] threads = new Thread[NUM_THREADS];
         int threadIndex = 0;
-        // Create 9 threads for 9 3x3 subsections, 9 threads for 9 columns and 9 threads for 9 rows.
-        // This will end up with a total of 27 threads.
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (i%3 == 0 && j%3 == 0) {
@@ -57,7 +53,7 @@ public class test {
             }
         }
 
-        // Start all threads
+        // Start threads
         for (int i = 0; i < threads.length; i++) {
             threads[i].start();
         }
