@@ -36,6 +36,7 @@ void *is3x3Valid(void* param) {
     // Confirm that parameters indicate a valid 3x3 subsection
     parameters *params = (parameters*) param;
     int sum = 0;
+    int product = 1;
     int row = params->row;
     int col = params->column;
     if (row > 6 || row % 3 != 0 || col > 6 || col % 3 != 0) {
@@ -48,9 +49,10 @@ void *is3x3Valid(void* param) {
         for (j = col; j < col + 3; j++) {
             int num = sudoku[i][j];
             sum += num;
+            product *= num;
         }
     }
-    if (sum == 45) {
+    if (sum == 45 && product == 362880) {
         valid[row + col/3] = 1; // Maps the subsection to an index in the first 8 indices of the valid array
         pthread_exit(NULL);
     }
