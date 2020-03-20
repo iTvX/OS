@@ -1,15 +1,3 @@
-/**
- * Multi-threaded Sudoku Solution Validator by Sarmad Hashmi
- *
- * This program defines a sudoku puzzle solution and then determines whether
- * the puzzle solution is valid using 27 threads. 9 for each 3x3 subsection, 9
- * for the 9 columns, and 9 for the 9 rows. Each thread updates their index in
- * a global array to true indicating that the corresponding region in the puzzle
- * they were responsible for is valid. The program then waits for all threads
- * to complete their execution and checks if all entries in the valid array have
- * been set to true. If yes, the solution is valid. If not, solution is invalid.
- */
-
 public class test {
     private static final int[][] sudoku = {
             {6, 2, 4, 5, 3, 9, 1, 8, 7},
@@ -44,20 +32,21 @@ public class test {
 
             // Check if numbers 1-9 only appear once in 3x3 subsection
             boolean[] validityArray = new boolean[9];
+            int sum = 0;
+            int product = 1;
             for (int i = row; i < row + 3; i++) {
                 for (int j = col; j < col + 3; j++) {
                     int num = sudoku[i][j];
-                    if (num < 1 || num > 9 || validityArray[num - 1]) {
-                        return;
-                    } else {
-                        validityArray[num - 1] = true;
-                    }
+                    sum = num + sum;
+                    product *= num;
                 }
             }
+            if (sum == 45 && product == 362880 ) {
+                valid[row + col/3] = true;
+            }
             // If reached this point, 3x3 subsection is valid.
-            valid[row + col/3] = true; // Maps the subsection to an index in the first 8 indices of the valid array
+             // Maps the subsection to an index in the first 8 indices of the valid array
         }
-
     }
 
     public static void main(String[] args) {
