@@ -39,15 +39,15 @@ public class test {
     }
 
     public static void main(String[] args) {
-        int NUM_THREADS = 9;
-        isValid = new boolean[NUM_THREADS];
-        Thread[] threads = new Thread[NUM_THREADS];
-        int threadIndex = 0;
+        int numThreads = 9;
+        isValid = new boolean[numThreads];
+        Thread[] threads = new Thread[numThreads];
+        int index = 0;
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (i%3 == 0 && j%3 == 0) {
-                    threads[threadIndex++] = new Thread(new validator(i, j));
+                    threads[index++] = new Thread(new validator(i, j));
                 }
 
             }
