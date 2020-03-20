@@ -25,73 +25,6 @@ public class test {
     // Array that worker threads will update
     private static boolean[] valid;
 
-    // Runnable object that determines if numbers 1-9 only appear once in a row
-    public static class IsRowValid implements Runnable {
-        int row;
-        int col;
-        IsRowValid(int row, int column) {
-            this.row = row;
-            this.col = column;
-        }
-
-        @Override
-        public void run() {
-            if (col != 0 || row > 8) {
-                System.out.println("Invalid row or column for row subsection!");
-                return;
-            }
-
-            // Check if numbers 1-9 only appear once in the row
-            boolean[] validityArray = new boolean[9];
-            for (int i = 0; i < 9; i++) {
-                // If the corresponding index for the number is set to 1, and the number is encountered again,
-                // the valid array will not be updated and the thread will exit.
-                int num = sudoku[row][i];
-                if (num < 1 || num > 9 || validityArray[num - 1]) {
-                    return;
-                } else if (!validityArray[num - 1]) {
-                    validityArray[num - 1] = true;
-                }
-            }
-            // If reached this point, row subsection is valid.
-            valid[9 + row] = true;
-        }
-    }
-
-    // Runnable object that determines if numbers 1-9 only appear once in a column
-    public static class IsColumnValid implements Runnable {
-        int row;
-        int col;
-        IsColumnValid(int row, int column) {
-            this.row = row;
-            this.col = column;
-        }
-
-        @Override
-        public void run() {
-            if (row != 0 || col > 8) {
-                System.out.println("Invalid row or column for col subsection!");
-                return;
-            }
-
-            // Check if numbers 1-9 only appear once in the column
-            boolean[] validityArray = new boolean[9];
-            int i;
-            for (i = 0; i < 9; i++) {
-                // If the corresponding index for the number is set to 1, and the number is encountered again,
-                // the valid array will not be updated and the thread will exit.
-                int num = sudoku[i][col];
-                if (num < 1 || num > 9 || validityArray[num - 1]) {
-                    return;
-                } else if (!validityArray[num - 1]) {
-                    validityArray[num - 1] = true;
-                }
-            }
-            // If reached this point, column subsection is valid.
-            valid[18 + col] = true;
-        }
-    }
-
     // Runnable object that determines if numbers 1-9 only appear once in a 3x3 subsection
     public static class Is3x3Valid implements Runnable {
         int row;
@@ -129,7 +62,7 @@ public class test {
 
     public static void main(String[] args) {
         //Since we totally have 27 threads (9 * 3 = 27)
-        int NUM_THREADS = 27;
+        int NUM_THREADS = 9;
         valid = new boolean[NUM_THREADS];
         Thread[] threads = new Thread[NUM_THREADS];
         int threadIndex = 0;
@@ -140,12 +73,7 @@ public class test {
                 if (i%3 == 0 && j%3 == 0) {
                     threads[threadIndex++] = new Thread(new Is3x3Valid(i, j));
                 }
-                if (i == 0) {
-                    threads[threadIndex++] = new Thread(new IsColumnValid(i, j));
-                }
-                if (j == 0) {
-                    threads[threadIndex++] = new Thread(new IsRowValid(i, j));
-                }
+
             }
         }
 
