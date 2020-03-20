@@ -56,7 +56,6 @@ public class JavaSudokuValidator {
             // If reached this point, row subsection is valid.
             valid[9 + row] = true;
         }
-
     }
 
     // Runnable object that determines if numbers 1-9 only appear once in a column
