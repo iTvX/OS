@@ -1,14 +1,3 @@
-/**
- * Multi-threaded Sudoku Solution Validator by Sarmad Hashmi
- *
- * This program defines a sudoku puzzle solution and then determines whether 
- * the puzzle solution is valid using 27 threads. 9 for each 3x3 subsection, 9
- * for the 9 columns, and 9 for the 9 rows. Each thread updates their index in 
- * a global array to 1 indicating that the corresponding region in the puzzle
- * they were responsible for is valid. The program then waits for all threads
- * to complete their execution and checks if all entries in the valid array have
- * been set to 1. If yes, the solution is valid. If not, solution is invalid.
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -46,28 +35,30 @@ int sudoku[9][9] = {
 void *is3x3Valid(void* param) {
     // Confirm that parameters indicate a valid 3x3 subsection
     parameters *params = (parameters*) param;
+    int sum = 0;
     int row = params->row;
     int col = params->column;
     if (row > 6 || row % 3 != 0 || col > 6 || col % 3 != 0) {
         fprintf(stderr, "Invalid row or column for subsection! row=%d, col=%d\n", row, col);
         pthread_exit(NULL);
     }
-    int validityArray[9] = {0};
+
     int i, j;
     for (i = row; i < row + 3; i++) {
         for (j = col; j < col + 3; j++) {
             int num = sudoku[i][j];
-            if (num < 1 || num > 9 || validityArray[num - 1] == 1) {
-                pthread_exit(NULL);
-            } else {
-                validityArray[num - 1] = 1;
-            }
+            sum += num;
         }
     }
-    // If reached this point, 3x3 subsection is valid.
-    valid[row + col/3] = 1; // Maps the subsection to an index in the first 8 indices of the valid array
-    pthread_exit(NULL);
+    if (sum == 45) {
+        valid[row + col/3] = 1; // Maps the subsection to an index in the first 8 indices of the valid array
+        pthread_exit(NULL);
+    }
+    return NULL;
 }
+
+
+
 
 int main() {
     pthread_t threads[num_threads];
