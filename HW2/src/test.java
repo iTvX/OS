@@ -29,9 +29,7 @@ public class test {
                 System.out.println("Invalid row or column for subsection!");
                 return;
             }
-
-            // Check if numbers 1-9 only appear once in 3x3 subsection
-            boolean[] validityArray = new boolean[9];
+           
             int sum = 0;
             int product = 1;
             for (int i = row; i < row + 3; i++) {
