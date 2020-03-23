@@ -1,3 +1,7 @@
+//reference:
+// Java Thread join
+// https://www.journaldev.com/1024/java-thread-join-example
+
 public class test {
     private static boolean[] isValid;
     private static int[][] source = {
@@ -52,12 +56,11 @@ public class test {
             }
         }
 
-
+// run
         for (Thread thread : threads) {
             thread.start();
         }
-
-
+// wait for all threads
         for (Thread thread : threads) {
             try {
                 thread.join();
