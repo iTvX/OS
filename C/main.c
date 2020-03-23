@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#define num_threads 9
 
 
-int valid[num_threads] = {0};
+// Since we only have 9 threads
+int valid[9] = {0};
 
 
 typedef struct {
@@ -53,7 +53,7 @@ void *validator(void* param) {
 
 
 int main() {
-    pthread_t threads[num_threads];
+    pthread_t threads[9];
 
     int threadIndex = 0;
     int i,j;
@@ -68,12 +68,12 @@ int main() {
         }
     }
 
-    for (i = 0; i < num_threads; i++) {
+    for (i = 0; i < 9; i++) {
         pthread_join(threads[i], NULL);
     }
 
 
-    for (i = 0; i < num_threads; i++) {
+    for (i = 0; i < 9; i++) {
         if (valid[i] == 0) {
             printf("Invalid!\n");
             return EXIT_SUCCESS;
