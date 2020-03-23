@@ -23,16 +23,16 @@ public class test {
 
         @Override
         public void run() {
-            int sum = 0;
-            int product = 1;
+            int sumAdd = 0;
+            int sumProduct = 1;
             for (int i = row; i < row + 3; i++) {
                 for (int j = col; j < col + 3; j++) {
                     int num = source[i][j];
-                    sum = num + sum;
-                    product *= num;
+                    sumAdd = num + sumAdd;
+                    sumProduct *= num;
                 }
             }
-            if (sum == 45 && product == 362880 ) {
+            if (sumAdd == 45 && sumProduct == 362880 ) {
                 isValid[row + col/3] = true;
             }
         }
