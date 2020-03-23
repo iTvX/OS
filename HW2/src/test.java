@@ -53,27 +53,27 @@ public class test {
             }
         }
 
-        // Start threads
-        for (int i = 0; i < threads.length; i++) {
-            threads[i].start();
+
+        for (Thread thread : threads) {
+            thread.start();
         }
 
-        // Wait for all threads to finish
-        for (int i = 0; i < threads.length; i++) {
+
+        for (Thread thread : threads) {
             try {
-                threads[i].join();
+                thread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        // If any of the entries in the valid array are 0, then the sudoku solution is invalid
-        for (int i = 0; i < isValid.length; i++) {
-            if (!isValid[i]) {
-                System.out.println("Sudoku solution is invalid!");
+
+        for (boolean b : isValid) {
+            if (!b) {
+                System.out.println("Invalid!");
                 return;
             }
         }
-        System.out.println("Sudoku solution is valid!");
+        System.out.println("Valid!");
     }
 }
