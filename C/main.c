@@ -6,7 +6,6 @@
 // Since we only have 9 threads
 int valid[9] = {0};
 
-
 typedef struct {
     int row;
     int column;
@@ -63,7 +62,7 @@ int main() {
                 parameters *data = (parameters *) malloc(sizeof(parameters));
                 data->row = i;
                 data->column = j;
-                pthread_create(&threads[threadIndex++], NULL, validator, data); // 3x3 subsection threads
+                pthread_create(&threads[threadIndex++], NULL, validator, data);
             }
         }
     }
