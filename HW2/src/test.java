@@ -1,4 +1,5 @@
 public class test {
+    private static boolean[] isValid;
     private static int[][] source = {
             {6, 2, 4, 5, 3, 9, 1, 8, 7},
             {5, 1, 9, 7, 2, 8, 6, 3, 4},
@@ -10,8 +11,6 @@ public class test {
             {4, 9, 6, 1, 8, 2, 5, 7, 3},
             {2, 8, 5, 4, 7, 3, 9, 1, 6}
     };
-
-    private static boolean[] isValid;
 
     public static class validator implements Runnable {
         int row;
@@ -39,9 +38,9 @@ public class test {
     }
 
     public static void main(String[] args) {
-        int numThreads = 9;
-        isValid = new boolean[numThreads];
-        Thread[] threads = new Thread[numThreads];
+        //Since we have 9 threads.
+        isValid = new boolean[9];
+        Thread[] threads = new Thread[9];
         int index = 0;
 
         for (int i = 0; i < 9; i++) {
