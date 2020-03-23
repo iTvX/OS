@@ -11,8 +11,6 @@ stdio.h
 -
 stdlib.h
 -
-unistd.h
--
 pthread.h
 -
 
