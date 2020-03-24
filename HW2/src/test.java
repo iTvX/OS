@@ -26,16 +26,16 @@ public class test {
 
         @Override
         public void run() {
-            int sumAdd = 0;
-            int sumProduct = 1;
+            int sumOfAdd = 0;
+            int sumOfProduct = 1;
             for (int i = row; i < row + 3; i++) {
                 for (int j = col; j < col + 3; j++) {
                     int num = source[i][j];
-                    sumAdd = num + sumAdd;
-                    sumProduct *= num;
+                    sumOfAdd = num + sumOfAdd;
+                    sumOfProduct *= num;
                 }
             }
-            if (sumAdd == 45 && sumProduct == 362880 ) {
+            if (sumOfAdd == 45 && sumOfProduct == 362880 ) {
                 isValid[row + col/3] = true;
             }
         }
