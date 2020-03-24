@@ -25,9 +25,10 @@ struct parameters{
 
 void *validator(void *param) {
 
-    struct parameters *params = (struct parameters*) param;
-    int row = params->row;
-    int col = params->column;
+    struct parameters *recv_para;
+    recv_para = (struct parameters *) param;
+    int row = recv_para->row;
+    int col = recv_para->column;
     //Set the sum of product and Add.
     int sumOfAdd = 0;
     int sumOfProduct = 1;
