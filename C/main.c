@@ -6,11 +6,6 @@
 // Since we only have 9 threads
 int valid[9] = {0};
 
-typedef struct {
-    int row;
-    int column;
-} parameters;
-
 int source[9][9] = {
         {6, 2, 4, 5, 3, 9, 1, 8, 7},
         {5, 1, 9, 7, 2, 8, 6, 3, 4},
@@ -23,7 +18,10 @@ int source[9][9] = {
         {2, 8, 5, 4, 7, 3, 9, 1, 6}
 };
 
-
+typedef struct {
+    int row;
+    int column;
+} parameters;
 
 void *validator(void *param) {
 
