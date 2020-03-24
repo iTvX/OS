@@ -1,3 +1,9 @@
+/* Reference:
+ * Passing multiple arguments to threaded function from pthread_create
+ * https://stackoverflow.com/questions/16230542/passing-multiple-arguments-to-threaded-function-from-pthread-create
+ *
+ *
+ * */
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
