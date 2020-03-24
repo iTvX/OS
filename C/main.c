@@ -24,21 +24,20 @@ int source[9][9] = {
         {2, 8, 5, 4, 7, 3, 9, 1, 6}
 };
 
-struct parameters{
+// Set the struct so that pthread_create can call multiple argument
+struct myParam{
     int row;
     int column;
 };
 
-void *validator(void *param) {
-
-    struct parameters *recv_para;
-    recv_para = (struct parameters *) param;
+void *validator(void *arg) {
+    struct myParam *recv_para;
+    recv_para = (struct myParam *) arg;
     int row = recv_para->row;
     int col = recv_para->column;
     //Set the sum of product and Add.
     int sumOfAdd = 0;
     int sumOfProduct = 1;
-
 
     int i, j;
     for (i = row; i < row + 3; i++) {
@@ -48,6 +47,7 @@ void *validator(void *param) {
             sumOfProduct *= num;
         }
     }
+    //45 and 362880 is given by the instruction (A2.pdf)
     if (sumOfAdd == 45 && sumOfProduct == 362880) {
         valid[row + col/3] = 1;
         pthread_exit(NULL);
@@ -60,16 +60,15 @@ void *validator(void *param) {
 
 int main() {
     pthread_t threads[9];
-
-    int threadIndex = 0;
+    int index = 0;
     int i,j;
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
             if (i%3 == 0 && j%3 == 0) {
-                struct parameters *data = (struct parameters *) malloc(sizeof(struct parameters));
+                struct myParam *data = (struct myParam *) malloc(sizeof(struct myParam));
                 data->row = i;
                 data->column = j;
-                pthread_create(&threads[threadIndex++], NULL, validator, data);
+                pthread_create(&threads[index++], NULL, validator, data);
             }
         }
     }
