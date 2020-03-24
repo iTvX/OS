@@ -61,11 +61,13 @@ public class test {
             thread.start();
         }
 // wait for all threads
+
         for (Thread thread : threads) {
             try {
                 thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                String threadName = Thread.currentThread().getName();
+                System.out.println("Exception from " + threadName + ".run");
             }
         }
 
