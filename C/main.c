@@ -61,14 +61,14 @@ void *validator(void *arg) {
 int main() {
     pthread_t threads[9];
     int index = 0;
-    int col,rol;
+    int col,row;
     for (col = 0; col < 9; col++) {
-        for (rol = 0; rol < 9; rol++) {
-            if (col % 3 == 0 && rol % 3 == 0) {
+        for (row = 0; row < 9; row++) {
+            if (col % 3 == 0 && row % 3 == 0) {
                 struct myParam *recv_para;
                 recv_para = (struct myParam *) malloc(sizeof(struct myParam));
                 recv_para->row = col;
-                recv_para->column = rol;
+                recv_para->column = row;
                 pthread_create(&threads[index++], NULL, validator, recv_para);
             }
         }
