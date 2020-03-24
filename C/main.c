@@ -18,14 +18,14 @@ int source[9][9] = {
         {2, 8, 5, 4, 7, 3, 9, 1, 6}
 };
 
-typedef struct {
+struct parameters{
     int row;
     int column;
-} parameters;
+} ;
 
 void *validator(void *param) {
 
-    parameters *params = (parameters*) param;
+    struct parameters *params = (struct parameters*) param;
     int sum = 0;
     int product = 1;
     int row = params->row;
@@ -57,7 +57,7 @@ int main() {
     for (i = 0; i < 9; i++) {
         for (j = 0; j < 9; j++) {
             if (i%3 == 0 && j%3 == 0) {
-                parameters *data = (parameters *) malloc(sizeof(parameters));
+                struct parameters *data = (struct parameters *) malloc(sizeof(struct parameters));
                 data->row = i;
                 data->column = j;
                 pthread_create(&threads[threadIndex++], NULL, validator, data);
