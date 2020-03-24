@@ -62,8 +62,9 @@ int main() {
     pthread_t threads[9];
     int index = 0;
     int col,row;
-    for (col = 0; col < 9; col++) {
-        for (row = 0; row < 9; row++) {
+    int num_colOrRow = 9;
+    for (col = 0; col < num_colOrRow; col++) {
+        for (row = 0; row < num_colOrRow; row++) {
             if (col % 3 == 0 && row % 3 == 0) {
                 struct myParam *recv_para;
                 recv_para = (struct myParam *) malloc(sizeof(struct myParam));
