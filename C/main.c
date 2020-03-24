@@ -81,9 +81,9 @@ int main() {
     for (i = 0; i < 9; i++) {
         if (valid[i] == 0) {
             printf("Invalid!\n");
-            return EXIT_SUCCESS;
+            return -1;
         }
     }
     printf("Valid!\n");
-    return EXIT_SUCCESS;
+    return 0;
 }
