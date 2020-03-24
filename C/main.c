@@ -21,25 +21,27 @@ int source[9][9] = {
 struct parameters{
     int row;
     int column;
-} ;
+};
 
 void *validator(void *param) {
 
     struct parameters *params = (struct parameters*) param;
-    int sum = 0;
-    int product = 1;
     int row = params->row;
     int col = params->column;
+    //Set the sum of product and Add.
+    int sumOfAdd = 0;
+    int sumOfProduct = 1;
+
 
     int i, j;
     for (i = row; i < row + 3; i++) {
         for (j = col; j < col + 3; j++) {
             int num = source[i][j];
-            sum += num;
-            product *= num;
+            sumOfAdd += num;
+            sumOfProduct *= num;
         }
     }
-    if (sum == 45 && product == 362880) {
+    if (sumOfAdd == 45 && sumOfProduct == 362880) {
         valid[row + col/3] = 1;
         pthread_exit(NULL);
     }
