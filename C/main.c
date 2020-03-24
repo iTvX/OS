@@ -61,25 +61,26 @@ void *validator(void *arg) {
 int main() {
     pthread_t threads[9];
     int index = 0;
-    int i,j;
-    for (i = 0; i < 9; i++) {
-        for (j = 0; j < 9; j++) {
-            if (i%3 == 0 && j%3 == 0) {
-                struct myParam *data = (struct myParam *) malloc(sizeof(struct myParam));
-                data->row = i;
-                data->column = j;
-                pthread_create(&threads[index++], NULL, validator, data);
+    int col,rol;
+    for (col = 0; col < 9; col++) {
+        for (rol = 0; rol < 9; rol++) {
+            if (col % 3 == 0 && rol % 3 == 0) {
+                struct myParam *recv_para;
+                recv_para = (struct myParam *) malloc(sizeof(struct myParam));
+                recv_para->row = col;
+                recv_para->column = rol;
+                pthread_create(&threads[index++], NULL, validator, recv_para);
             }
         }
     }
 
-    for (i = 0; i < 9; i++) {
-        pthread_join(threads[i], NULL);
+    for (col = 0; col < 9; col++) {
+        pthread_join(threads[col], NULL);
     }
 
 
-    for (i = 0; i < 9; i++) {
-        if (valid[i] == 0) {
+    for (col = 0; col < 9; col++) {
+        if (valid[col] == 0) {
             printf("Invalid!\n");
             return -1;
         }
