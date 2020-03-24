@@ -25,7 +25,7 @@ int source[9][9] = {
 
 
 
-void *validator(void* param) {
+void *validator(void *param) {
 
     parameters *params = (parameters*) param;
     int sum = 0;
