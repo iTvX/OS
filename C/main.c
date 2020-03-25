@@ -9,6 +9,7 @@
 #include <pthread.h>
 #define num_colOrRow 9
 #define numOfThreads 9
+#define sub_interval 3
 
 
 
@@ -42,9 +43,8 @@ void *validator(void *arg) {
     int sumOfAdd = 0;
     int sumOfProduct = 1;
 
-    int i, j;
-    for (i = row; i < row + 3; i++) {
-        for (j = col; j < col + 3; j++) {
+    for (int i = row; i < row + sub_interval; i++) {
+        for (int j = col; j < col + sub_interval; j++) {
             int num = source[i][j];
             sumOfAdd += num;
             sumOfProduct *= num;
@@ -67,7 +67,7 @@ int main() {
     int col,row;
     for (col = 0; col < num_colOrRow; col++) {
         for (row = 0; row < num_colOrRow; row++) {
-            if (col % 3 == 0 && row % 3 == 0) {
+            if (col % sub_interval == 0 && row % sub_interval == 0) {
                 struct myParam *recv_para;
                 recv_para = (struct myParam *) malloc(sizeof(struct myParam));
                 recv_para->row = col;
