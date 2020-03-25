@@ -32,13 +32,19 @@ public class Sudoko {
         public void run() {
             int sumOfAdd = 0;
             int sumOfProduct = 1;
-            for (int i = row; i < row + sub_interval; i++) {
-                for (int j = col; j < col + sub_interval; j++) {
+
+            int i = row;
+            while (i < row + sub_interval) {
+                int j = col;
+                while (j < col + sub_interval) {
                     int num = source[i][j];
                     sumOfAdd = num + sumOfAdd;
                     sumOfProduct *= num;
+                    j++;
                 }
+                i++;
             }
+
             if (sumOfAdd == 45 && sumOfProduct == 362880) {
                 isValid[row + col / 3] = true;
             }
