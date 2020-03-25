@@ -74,7 +74,9 @@ public class test {
             }
         }
 
-
+//if one or more than one of isValid array is not valid, then print "Invalid" and return,
+// if all of them are valid, then will not going to
+// "if statement", it would print "valid" instead.
         for (boolean b : isValid) {
             if (!b) {
                 System.out.println("Invalid!");
