@@ -1,4 +1,8 @@
-/* Reference:
+/* Since I found C doesn't have "this" argument, and I have tried a lot of way to pass multiple argument
+ * to threaded function from pthread_create but all of them didn't work. So I Google it how to do that
+ * and found a way to solve that: use struct and set multiple parameter in that struct.
+ *
+ * Reference:
  * Passing multiple arguments to threaded function from pthread_create
  * https://stackoverflow.com/questions/16230542/passing-multiple-arguments-to-threaded-function-from-pthread-create
  *
