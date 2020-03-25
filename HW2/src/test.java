@@ -50,10 +50,10 @@ public class test {
         Thread[] threads = new Thread[numOfThreads];
         int index = 0;
 
-        for (int i = 0; i < num_colOrRow; i++) {
-            for (int j = 0; j < num_colOrRow; j++) {
-                if (i % sub_interval == 0 && j % sub_interval == 0) {
-                    threads[index++] = new Thread(new validator(i, j));
+        for (int col = 0; col < num_colOrRow; col++) {
+            for (int row = 0; row < num_colOrRow; row++) {
+                if (col % sub_interval == 0 && row % sub_interval == 0) {
+                    threads[index++] = new Thread(new validator(col, row));
                 }
 
             }
