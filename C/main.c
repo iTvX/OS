@@ -7,12 +7,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#define num_colOrRow 9
+#define numOfThreads 9
+
 
 
 // Since we only have 9 threads
-int valid[9] = {0};
+int valid[numOfThreads] = {0};
 
-int source[9][9] = {
+int source[num_colOrRow][num_colOrRow] = {
         {6, 2, 4, 5, 3, 9, 1, 8, 7},
         {5, 1, 9, 7, 2, 8, 6, 3, 4},
         {8, 3, 7, 6, 1, 4, 2, 9, 5},
@@ -62,7 +65,6 @@ int main() {
     pthread_t threads[9];
     int index = 0;
     int col,row;
-    int num_colOrRow = 9;
     for (col = 0; col < num_colOrRow; col++) {
         for (row = 0; row < num_colOrRow; row++) {
             if (col % 3 == 0 && row % 3 == 0) {
@@ -75,12 +77,12 @@ int main() {
         }
     }
 
-    for (col = 0; col < 9; col++) {
+    for (col = 0; col < numOfThreads; col++) {
         pthread_join(threads[col], NULL);
     }
 
 
-    for (col = 0; col < 9; col++) {
+    for (col = 0; col < numOfThreads; col++) {
         if (valid[col] == 0) {
             printf("Invalid!\n");
             return -1;
