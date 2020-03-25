@@ -3,6 +3,9 @@
 // https://www.journaldev.com/1024/java-thread-join-example
 
 public class test {
+    public static int num_colOrRow = 9;
+    public static int numOfThreads = 9;
+    private static int sub_interval = 3;
     private static boolean[] isValid;
     private static int[][] source = {
             {6, 2, 4, 5, 3, 9, 1, 8, 7},
@@ -19,6 +22,7 @@ public class test {
     public static class validator implements Runnable {
         int row;
         int col;
+
         validator(int row, int column) {
             this.row = row;
             this.col = column;
@@ -28,28 +32,27 @@ public class test {
         public void run() {
             int sumOfAdd = 0;
             int sumOfProduct = 1;
-            for (int i = row; i < row + 3; i++) {
-                for (int j = col; j < col + 3; j++) {
+            for (int i = row; i < row + sub_interval; i++) {
+                for (int j = col; j < col + sub_interval; j++) {
                     int num = source[i][j];
                     sumOfAdd = num + sumOfAdd;
                     sumOfProduct *= num;
                 }
             }
-            if (sumOfAdd == 45 && sumOfProduct == 362880 ) {
-                isValid[row + col/3] = true;
+            if (sumOfAdd == 45 && sumOfProduct == 362880) {
+                isValid[row + col / 3] = true;
             }
         }
     }
 
     public static void main(String[] args) {
-        //Since we have 9 threads.
-        isValid = new boolean[9];
-        Thread[] threads = new Thread[9];
+        isValid = new boolean[numOfThreads];
+        Thread[] threads = new Thread[numOfThreads];
         int index = 0;
 
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (i%3 == 0 && j%3 == 0) {
+        for (int i = 0; i < num_colOrRow; i++) {
+            for (int j = 0; j < num_colOrRow; j++) {
+                if (i % sub_interval == 0 && j % sub_interval == 0) {
                     threads[index++] = new Thread(new validator(i, j));
                 }
 
