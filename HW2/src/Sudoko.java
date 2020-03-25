@@ -56,14 +56,19 @@ public class Sudoko {
         Thread[] threads = new Thread[numOfThreads];
         int index = 0;
 
-        for (int col = 0; col < num_colOrRow; col++) {
-            for (int row = 0; row < num_colOrRow; row++) {
+
+        int col = 0;
+        while (col < num_colOrRow) {
+            int row = 0;
+            while (row < num_colOrRow) {
                 if (col % sub_interval == 0 && row % sub_interval == 0) {
                     threads[index++] = new Thread(new validator(col, row));
                 }
-
+                row++;
             }
+            col++;
         }
+
 
 // run
         for (Thread thread : threads) {
