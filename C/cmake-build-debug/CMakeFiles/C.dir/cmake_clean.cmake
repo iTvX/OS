@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "C"
   "C.pdb"
-  "CMakeFiles/C.dir/main.c.o"
+  "CMakeFiles/C.dir/Sudoko.c.o"
 )
 
 # Per-language clean rules from dependency scanning.

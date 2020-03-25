@@ -40,6 +40,7 @@ struct myParam{
 };
 
 void *validator(void *arg) {
+    //take arg to be pointer to myParm.
     struct myParam *recv_para;
     recv_para = (struct myParam *) arg;
     int row = recv_para->row;

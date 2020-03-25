@@ -123,32 +123,32 @@ C/fast:
 	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/build
 .PHONY : C/fast
 
-main.o: main.c.o
+Sudoko.o: Sudoko.c.o
 
-.PHONY : main.o
+.PHONY : Sudoko.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/main.c.o
-.PHONY : main.c.o
+Sudoko.c.o:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/Sudoko.c.o
+.PHONY : Sudoko.c.o
 
-main.i: main.c.i
+Sudoko.i: Sudoko.c.i
 
-.PHONY : main.i
+.PHONY : Sudoko.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/main.c.i
-.PHONY : main.c.i
+Sudoko.c.i:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/Sudoko.c.i
+.PHONY : Sudoko.c.i
 
-main.s: main.c.s
+Sudoko.s: Sudoko.c.s
 
-.PHONY : main.s
+.PHONY : Sudoko.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/main.c.s
-.PHONY : main.c.s
+Sudoko.c.s:
+	$(MAKE) -f CMakeFiles/C.dir/build.make CMakeFiles/C.dir/Sudoko.c.s
+.PHONY : Sudoko.c.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... C"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... Sudoko.o"
+	@echo "... Sudoko.i"
+	@echo "... Sudoko.s"
 .PHONY : help
 
 

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/zijieyu/Desktop/OS/C/main.c
+/Users/zijieyu/Desktop/OS/C/Sudoko.c
 stdio.h
 -
 stdlib.h

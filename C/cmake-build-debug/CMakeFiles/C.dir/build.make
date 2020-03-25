@@ -57,27 +57,27 @@ include CMakeFiles/C.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/C.dir/flags.make
 
-CMakeFiles/C.dir/main.c.o: CMakeFiles/C.dir/flags.make
-CMakeFiles/C.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/zijieyu/Desktop/OS/C/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/C.dir/main.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/C.dir/main.c.o   -c /Users/zijieyu/Desktop/OS/C/main.c
+CMakeFiles/C.dir/Sudoko.c.o: CMakeFiles/C.dir/flags.make
+CMakeFiles/C.dir/Sudoko.c.o: ../Sudoko.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/zijieyu/Desktop/OS/C/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/C.dir/Sudoko.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/C.dir/Sudoko.c.o   -c /Users/zijieyu/Desktop/OS/C/Sudoko.c
 
-CMakeFiles/C.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/C.dir/main.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/zijieyu/Desktop/OS/C/main.c > CMakeFiles/C.dir/main.c.i
+CMakeFiles/C.dir/Sudoko.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/C.dir/Sudoko.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/zijieyu/Desktop/OS/C/Sudoko.c > CMakeFiles/C.dir/Sudoko.c.i
 
-CMakeFiles/C.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/C.dir/main.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/zijieyu/Desktop/OS/C/main.c -o CMakeFiles/C.dir/main.c.s
+CMakeFiles/C.dir/Sudoko.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/C.dir/Sudoko.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/zijieyu/Desktop/OS/C/Sudoko.c -o CMakeFiles/C.dir/Sudoko.c.s
 
 # Object files for target C
 C_OBJECTS = \
-"CMakeFiles/C.dir/main.c.o"
+"CMakeFiles/C.dir/Sudoko.c.o"
 
 # External object files for target C
 C_EXTERNAL_OBJECTS =
 
-C : CMakeFiles/C.dir/main.c.o
+C : CMakeFiles/C.dir/Sudoko.c.o
 C : CMakeFiles/C.dir/build.make
 C : CMakeFiles/C.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/zijieyu/Desktop/OS/C/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable C"

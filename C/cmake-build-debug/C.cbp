@@ -78,7 +78,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/zijieyu/Desktop/OS/C/main.c">
+		<Unit filename="/Users/zijieyu/Desktop/OS/C/Sudoko.c">
 			<Option target="C"/>
 		</Unit>
 		<Unit filename="/Users/zijieyu/Desktop/OS/C/CMakeLists.txt">
