@@ -13,8 +13,6 @@
 #include <pthread.h>
 
 
-
-
 #define num_colOrRow 9
 #define numOfThreads 9
 #define sub_interval 3
@@ -34,7 +32,7 @@ int source[num_colOrRow][num_colOrRow] = {
 };
 
 // Set the struct so that pthread_create can call multiple argument
-struct myParam{
+struct myParam {
     int row;
     int column;
 };
@@ -65,14 +63,14 @@ void *validator(void *arg) {
 }
 
 
-
-
 int main() {
     pthread_t threads[numOfThreads];
     int index = 0;
-    int col,row;
-    for (col = 0; col < num_colOrRow; col++) {
-        for (row = 0; row < num_colOrRow; row++) {
+    int col = 0;
+    int row = 0;
+    while (col < num_colOrRow) {
+        row = 0;
+        while (row < num_colOrRow) {
             if (col % sub_interval == 0 && row % sub_interval == 0) {
                 struct myParam *recv_para;
                 recv_para = (struct myParam *) malloc(sizeof(struct myParam));
@@ -80,20 +78,26 @@ int main() {
                 recv_para->column = col;
                 pthread_create(&threads[index++], NULL, validator, recv_para);
             }
+                row++;
         }
+        col++;
     }
 
-    for (col = 0; col < numOfThreads; col++) {
-        pthread_join(threads[col], NULL);
-    }
+            col = 0;
+            while (col< numOfThreads) {
+                pthread_join(threads[col], NULL);
+                col++;
+            }
 
 
-    for (col = 0; col < numOfThreads; col++) {
-        if (isValid[col] == 0) {
-            printf("Invalid!\n");
-            return -1;
-        }
-    }
-    printf("Valid!\n");
-    return 0;
+
+            col = 0;
+            while (col < numOfThreads) {
+                if (isValid[col] == 0) {
+                    printf("Invalid!\n");
+                    return -1;
+                }
+                col++;
+            }
+            printf("valid!\n");
 }
