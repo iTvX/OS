@@ -67,9 +67,8 @@ int main() {
     pthread_t threads[numOfThreads];
     int index = 0;
     int col = 0;
-    int row = 0;
     while (col < num_colOrRow) {
-        row = 0;
+        int row = 0;
         while (row < num_colOrRow) {
             if (col % sub_interval == 0 && row % sub_interval == 0) {
                 struct myParam *recv_para;
@@ -78,26 +77,25 @@ int main() {
                 recv_para->column = col;
                 pthread_create(&threads[index++], NULL, validator, recv_para);
             }
-                row++;
+            row++;
         }
         col++;
     }
 
-            col = 0;
-            while (col< numOfThreads) {
-                pthread_join(threads[col], NULL);
-                col++;
-            }
+    col = 0;
+    while (col < numOfThreads) {
+        pthread_join(threads[col], NULL);
+        col++;
+    }
 
 
-
-            col = 0;
-            while (col < numOfThreads) {
-                if (isValid[col] == 0) {
-                    printf("Invalid!\n");
-                    return -1;
-                }
-                col++;
-            }
-            printf("valid!\n");
+    col = 0;
+    while (col < numOfThreads) {
+        if (isValid[col] == 0) {
+            printf("Invalid!\n");
+            return -1;
+        }
+        col++;
+    }
+    printf("valid!\n");
 }
