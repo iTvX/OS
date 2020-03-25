@@ -7,14 +7,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+
+
+
+
 #define num_colOrRow 9
 #define numOfThreads 9
 #define sub_interval 3
-
-
-
+// to check each of thread is valid.
 int isValid[numOfThreads];
-
+// import the source.
 int source[num_colOrRow][num_colOrRow] = {
         {6, 2, 4, 5, 3, 9, 1, 8, 7},
         {5, 1, 9, 7, 2, 8, 6, 3, 4},
@@ -69,8 +71,8 @@ int main() {
             if (col % sub_interval == 0 && row % sub_interval == 0) {
                 struct myParam *recv_para;
                 recv_para = (struct myParam *) malloc(sizeof(struct myParam));
-                recv_para->row = col;
-                recv_para->column = row;
+                recv_para->row = row;
+                recv_para->column = col;
                 pthread_create(&threads[index++], NULL, validator, recv_para);
             }
         }
