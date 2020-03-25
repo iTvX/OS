@@ -13,8 +13,7 @@
 
 
 
-// Since we only have 9 threads
-int valid[numOfThreads] = {0};
+int isValid[numOfThreads];
 
 int source[num_colOrRow][num_colOrRow] = {
         {6, 2, 4, 5, 3, 9, 1, 8, 7},
@@ -52,7 +51,7 @@ void *validator(void *arg) {
     }
     //45 and 362880 is given by the instruction (A2.pdf)
     if (sumOfAdd == 45 && sumOfProduct == 362880) {
-        valid[row + col/3] = 1;
+        isValid[row + col / 3] = 1;
         pthread_exit(NULL);
     }
     return NULL;
@@ -83,7 +82,7 @@ int main() {
 
 
     for (col = 0; col < numOfThreads; col++) {
-        if (valid[col] == 0) {
+        if (isValid[col] == 0) {
             printf("Invalid!\n");
             return -1;
         }
