@@ -2,7 +2,7 @@
 // Java Thread join
 // https://www.journaldev.com/1024/java-thread-join-example
 
-public class test {
+public class Sudoko {
     public static int num_colOrRow = 9;
     public static int numOfThreads = 9;
     private static int sub_interval = 3;
