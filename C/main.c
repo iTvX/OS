@@ -67,7 +67,7 @@ void *validator(void *arg) {
 
 
 int main() {
-    pthread_t threads[9];
+    pthread_t threads[numOfThreads];
     int index = 0;
     int col,row;
     for (col = 0; col < num_colOrRow; col++) {
