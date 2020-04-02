@@ -1,0 +1,3 @@
+/Users/zijieyu/Desktop/OS/HW3/C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/zijieyu/Desktop/OS/HW3/C/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/zijieyu/Desktop/OS/HW3/C/cmake-build-debug/CMakeFiles/C.dir

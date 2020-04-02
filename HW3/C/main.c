@@ -26,9 +26,9 @@ pthread_t *students;
 
 void help_student(int sleep_time)
 {
-        printf("Helping a student for %d seconds waiting students = %d\n",sleep_time, waiting_students);
+    printf("Helping a student for %d seconds waiting students = %d\n",sleep_time, waiting_students);
 
-        sleep(sleep_time);
+    sleep(sleep_time);
 }
 
 void *teacher_loop(void *param)
@@ -115,38 +115,38 @@ void initilize()
     int i;
     if ( pthread_mutex_init(&mutex_lock, NULL) != 0)
         fprintf(stderr, "%s\n",strerror(errno));
- 
+
     if (sem_unlink("STUDENTS") == -1)
         fprintf(stderr, "%s\n",strerror(errno));
-     
+
     if (sem_unlink("teacher") == -1)
         fprintf(stderr, "%s\n",strerror(errno));
-     
+
     if ( (students_sem = sem_open("STUDENTS", O_CREAT, 0666, 0)) == SEM_FAILED)
         fprintf(stderr, "%s\n",strerror(errno));
-     
+
     if ( (teacher_sem = sem_open("teacher", O_CREAT, 0666, 0)) == SEM_FAILED)
         fprintf(stderr,"%s\n",strerror(errno));
- 
+
     waiting_students = 0;
- 
+
     for (i = 0; i < total_stu_number; i++)
         student_id[i] = i;
 }
- 
+
 void create_student_pthreads()
 {
-int i; 
+    int i;
     for (i = 0; i < total_stu_number; i++) {
         pthread_create(&students[i], 0, student_loop, (void *)&student_id[i]);
     }
 }
- 
+
 void create_teacher_pthread()
 {
     pthread_create(&teacher, 0, teacher_loop, 0);
 }
- 
+
 int main(void)
 {
     int i;
@@ -156,15 +156,15 @@ int main(void)
     students = (pthread_t *)malloc(sizeof(pthread_t)*total_stu_number);
     initilize();
     create_teacher_pthread();
-    create_student_pthreads(); 
+    create_student_pthreads();
     for (i = 0; i < total_stu_number; i++)
         pthread_join(students[i], NULL);
-    
+
     // delete teacher pthread
     if (pthread_cancel(teacher) != 0)
         printf("%s\n",strerror(errno));
     free(student_id);
     free(students);
- 
+
     return 0;
 }
