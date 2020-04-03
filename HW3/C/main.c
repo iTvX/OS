@@ -7,9 +7,6 @@
 #include <unistd.h>
 
 
-#define MAX_SLEEP_TIME  5
-
-
 int finished = 0;
 sem_t waking_teacher;
 sem_t request_teacher_help;
