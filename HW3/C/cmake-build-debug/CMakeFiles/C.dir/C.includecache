@@ -21,8 +21,4 @@ stdlib.h
 -
 unistd.h
 -
-pthread.h
--
-semaphore.h
--
 

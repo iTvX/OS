@@ -5,12 +5,10 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <pthread.h>
-#include <semaphore.h>
+
 
 #define MAX_SLEEP_TIME  5
-#define MAX_WAITING_STUDENTS 3
-#define NUM_OF_SEATS 3
+
 
 int finished = 0;
 sem_t waking_teacher;
@@ -18,21 +16,11 @@ sem_t request_teacher_help;
 sem_t occupy_seat;
 sem_t get_chance;
 int total_stu_number;
-int waiting_students;
-int student_number;
 int *student_id;
 
 pthread_t teacher;
 pthread_t *students;
 
-
-void help_student(int sleep_time)
-{
-    printf("Helping a student for %d seconds\n",sleep_time);
-
-    sleep(sleep_time);
-    printf("finished helping student");
-}
 
 void *teacher_loop(void *param)
 {
@@ -46,8 +34,6 @@ void *teacher_loop(void *param)
         /* wake up the teacher*/
         sem_wait(&waking_teacher);
         if (!finished) {
-            //sleep_time = (int)((random() % MAX_SLEEP_TIME) + 1);
-            //help_student(sleep_time);
             printf("teacher help student\n");
             sleep(rand()%2+1);
             printf("teacher now is free\n");
@@ -62,17 +48,13 @@ void *teacher_loop(void *param)
 void* student_loop(void *param)
 {
     int *lnumber = (int *)param;
-    int number = *lnumber;
-    int sleep_time;
     int times_through_loop = 0;
 
     srand(time(NULL));
 
     while (times_through_loop < 1) {
-        sleep_time = (int)((random() % MAX_SLEEP_TIME) + 1);
         sem_wait(&occupy_seat);
         printf("Student %d takes a seat\n",*lnumber);
-
         sem_wait(&get_chance);
         sem_post(&occupy_seat);
         printf("Student %d waking the teacher.\n",*lnumber);
@@ -86,7 +68,7 @@ void* student_loop(void *param)
     return NULL;
 }
 
-void initilize()
+void init()
 {
     int i;
     for (i = 0; i < total_stu_number; i++)
@@ -118,7 +100,7 @@ int main(void)
     scanf("%d", &total_stu_number);
     student_id = (int *)malloc(sizeof(int)*total_stu_number);
     students = (pthread_t *)malloc(sizeof(pthread_t)*total_stu_number);
-    initilize();
+    init();
     create_teacher_pthread();
     create_student_pthreads();
     for (i = 0; i < total_stu_number; i++)
