@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/zijieyu/Desktop/OS/HW3/C/main.c
+/home/zijieyu/Desktop/OS/HW3/C/main.c
 pthread.h
 -
 stdio.h
@@ -20,5 +20,9 @@ errno.h
 stdlib.h
 -
 unistd.h
+-
+pthread.h
+-
+semaphore.h
 -
 
