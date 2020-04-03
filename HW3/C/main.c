@@ -11,10 +11,12 @@
 #define MAX_SLEEP_TIME  5
 #define MAX_WAITING_STUDENTS 3
 #define NUM_OF_SEATS 3
-pthread_mutex_t mutex_lock;
 
-sem_t *students_sem;
-sem_t *teacher_sem;
+int finished = 0;
+sem_t waking_teacher;
+sem_t request_teacher_help;
+sem_t occupy_seat;
+sem_t get_chance;
 int total_stu_number;
 int waiting_students;
 int student_number;
@@ -26,9 +28,10 @@ pthread_t *students;
 
 void help_student(int sleep_time)
 {
-    printf("Helping a student for %d seconds waiting students = %d\n",sleep_time, waiting_students);
+    printf("Helping a student for %d seconds\n",sleep_time);
 
     sleep(sleep_time);
+    printf("finished helping student");
 }
 
 void *teacher_loop(void *param)
@@ -38,36 +41,24 @@ void *teacher_loop(void *param)
     /* seed random generator */
     srand((unsigned)time(NULL));
 
-    while (1) {
-
-        /* wait for a student to show up */
-        if ( sem_wait(students_sem) != 0)
-            printf("%s\n",strerror(errno));
-
-        /* acquire the mutex lock */
-        if (pthread_mutex_lock(&mutex_lock) != 0)
-            printf("%s\n",strerror(errno));
-
-        --waiting_students;
-
-        /* indicate the teacher is ready to help a student */
-        if (sem_post(teacher_sem) != 0)
-            printf("%s\n",strerror(errno));
-
-        /* release mutex lock */
-        if (pthread_mutex_unlock(&mutex_lock) != 0)
-            printf("%s\n",strerror(errno));
-
-        sleep_time = (int)((random() % MAX_SLEEP_TIME) + 1);
-        help_student(sleep_time);
+    while (!finished) {
+        printf("teacher is sleeping\n");
+        /* wake up the teacher*/
+        sem_wait(&waking_teacher);
+        if (!finished) {
+            //sleep_time = (int)((random() % MAX_SLEEP_TIME) + 1);
+            //help_student(sleep_time);
+            printf("teacher help student\n");
+            sleep(rand()%2+1);
+            printf("teacher now is free\n");
+            sem_post(&request_teacher_help);
+        }
+        else {
+            printf("finish helping all students\n");
+        }
     }
 }
 
-void hang_out(int i, int sleep_time)
-{
-    printf("Student %d hanging out for %d seconds\n",i,sleep_time);
-    sleep(sleep_time);
-}
 void* student_loop(void *param)
 {
     int *lnumber = (int *)param;
@@ -77,35 +68,20 @@ void* student_loop(void *param)
 
     srand(time(NULL));
 
-    while (times_through_loop < 5) {
+    while (times_through_loop < 1) {
         sleep_time = (int)((random() % MAX_SLEEP_TIME) + 1);
-        hang_out(*lnumber,sleep_time);
+        sem_wait(&occupy_seat);
+        printf("Student %d takes a seat\n",*lnumber);
 
-        /* acquire the mutex lock */
-        if ( pthread_mutex_lock(&mutex_lock) != 0)
-            printf("Student %s\n",strerror(errno));
+        sem_wait(&get_chance);
+        sem_post(&occupy_seat);
+        printf("Student %d waking the teacher.\n",*lnumber);
+        sem_post(&waking_teacher);
+        printf("Student %d receiving help\n",*lnumber);
+        sem_wait(&request_teacher_help);
+        sem_post(&get_chance);
 
-        if (waiting_students < NUM_OF_SEATS) {
-            ++waiting_students;
-            printf("Student %d takes a seat waiting = %d\n",*lnumber, waiting_students);
-
-            if (sem_post(students_sem) != 0)
-                printf("Student %s\n",strerror(errno));
-
-            if (pthread_mutex_unlock(&mutex_lock) != 0)
-                printf("Student %s\n",strerror(errno));
-
-            if (sem_wait(teacher_sem) != 0)
-                printf("Student %s\n",strerror(errno));
-
-            printf("Student %d receiving help\n",*lnumber);
-
-
-            ++times_through_loop;
-        } else {
-            printf("Student %d will try later\n",*lnumber);
-            pthread_mutex_unlock(&mutex_lock);
-        }
+        ++times_through_loop;
     }
     return NULL;
 }
@@ -113,25 +89,13 @@ void* student_loop(void *param)
 void initilize()
 {
     int i;
-    if ( pthread_mutex_init(&mutex_lock, NULL) != 0)
-        fprintf(stderr, "%s\n",strerror(errno));
-
-    if (sem_unlink("STUDENTS") == -1)
-        fprintf(stderr, "%s\n",strerror(errno));
-
-    if (sem_unlink("teacher") == -1)
-        fprintf(stderr, "%s\n",strerror(errno));
-
-    if ( (students_sem = sem_open("STUDENTS", O_CREAT, 0666, 0)) == SEM_FAILED)
-        fprintf(stderr, "%s\n",strerror(errno));
-
-    if ( (teacher_sem = sem_open("teacher", O_CREAT, 0666, 0)) == SEM_FAILED)
-        fprintf(stderr,"%s\n",strerror(errno));
-
-    waiting_students = 0;
-
     for (i = 0; i < total_stu_number; i++)
         student_id[i] = i;
+    sem_init(&waking_teacher, 0, 0);
+    sem_init(&request_teacher_help, 0, 0);
+    sem_init(&occupy_seat, 0, 3);
+    sem_init(&get_chance, 0, 1);
+
 }
 
 void create_student_pthreads()
@@ -159,10 +123,11 @@ int main(void)
     create_student_pthreads();
     for (i = 0; i < total_stu_number; i++)
         pthread_join(students[i], NULL);
-
+    finished = 1;
+    printf("finished\n");
     // delete teacher pthread
     if (pthread_cancel(teacher) != 0)
-        printf("%s\n",strerror(errno));
+        printf("error 2 %s\n",strerror(errno));
     free(student_id);
     free(students);
 
