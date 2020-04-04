@@ -36,7 +36,7 @@ void *teacher_loop(void *param)
     }
 }
 
-void* student_loop(void *param)
+void* stu(void *param)
 {
     int *lnumber = (int *)param;
     int times_through_loop = 0;
@@ -72,15 +72,15 @@ void init()
 
 }
 
-void create_student_pthreads()
+void creStuThreads()
 {
     int i;
     for (i = 0; i < stuNum; i++) {
-        pthread_create(&students[i], 0, student_loop, (void *)&stuID[i]);
+        pthread_create(&students[i], 0, stu, (void *) &stuID[i]);
     }
 }
 
-void create_teacher_pthread()
+void creTeachThreads()
 {
     pthread_create(&teacher, 0, teacher_loop, 0);
 }
@@ -93,8 +93,8 @@ int main(void)
     stuID = (int *)malloc(sizeof(int) * stuNum);
     students = (pthread_t *)malloc(sizeof(pthread_t) * stuNum);
     init();
-    create_teacher_pthread();
-    create_student_pthreads();
+    creTeachThreads();
+    creStuThreads();
     for (i = 0; i < stuNum; i++)
         pthread_join(students[i], NULL);
     finished = 1;
