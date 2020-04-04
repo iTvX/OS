@@ -39,20 +39,20 @@ void *artTeacher(void *param)
 
 void* stu(void *param)
 {
-    int *lnumber = (int *)param;
+    int *number = (int *)param;
     int times_through_loop = 0;
 
     srand(time(NULL));
 
     while (times_through_loop < 1) {
         sem_wait(&occupy);
-        printf("Student %d takes a seat\n",*lnumber);
+        printf("Student %d takes a seat\n",*number);
 
         sem_wait(&getChance);
         sem_post(&occupy);
-        printf("Student %d waking to the teacher.\n",*lnumber);
+        printf("Student %d waking to the teacher.\n",*number);
         sem_post(&walTeacher);
-        printf("Student %d receiving help\n",*lnumber);
+        printf("Student %d receiving help\n",*number);
         sem_wait(&requestHelp);
         sem_post(&getChance);
 
@@ -100,7 +100,6 @@ int main(void)
         pthread_join(students[i], NULL);
     finished = 1;
     printf("finished\n");
-    // delete teacher pthread
     if (pthread_cancel(teacher) != 0)
         printf("error 2 %s\n",strerror(errno));
     free(stuID);
