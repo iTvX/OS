@@ -82,7 +82,7 @@ void creTeachThreads() {
 
 int main(void) {
     int i;
-    printf("please input numbers of students that need help: ");
+    printf("please input numbers of students that need to help: ");
     scanf("%d", &stuNum);
     stuID = (int *) malloc(sizeof(int) * stuNum);
     students = (pthread_t *) malloc(sizeof(pthread_t) * stuNum);
