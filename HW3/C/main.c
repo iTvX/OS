@@ -6,32 +6,33 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int finished = 0;
+
 sem_t walTeacher;
 sem_t requestHelp;
 sem_t occupy;
 sem_t getChance;
 int stuNum;
 int *stuID;
+int finished = 0;
 
 pthread_t teacher;
 pthread_t *students;
 
 
-void *teacher_loop(void *param)
+void *artTeacher(void *param)
 {
     srand((unsigned)time(NULL));
     while (!finished) {
-        printf("teacher is sleeping\n");
+        printf("teacher takes a nap\n");
         sem_wait(&walTeacher);
         if (!finished) {
-            printf("teacher help student\n");
+            printf("teacher helps student\n");
             sleep(rand()%2+1);
             printf("teacher now is free\n");
             sem_post(&requestHelp);
         }
         else {
-            printf("finish helping all students\n");
+            printf("teacher has finished helping all students\n");
         }
     }
 }
@@ -49,7 +50,7 @@ void* stu(void *param)
 
         sem_wait(&getChance);
         sem_post(&occupy);
-        printf("Student %d waking the teacher.\n",*lnumber);
+        printf("Student %d waking to the teacher.\n",*lnumber);
         sem_post(&walTeacher);
         printf("Student %d receiving help\n",*lnumber);
         sem_wait(&requestHelp);
@@ -82,13 +83,13 @@ void creStuThreads()
 
 void creTeachThreads()
 {
-    pthread_create(&teacher, 0, teacher_loop, 0);
+    pthread_create(&teacher, 0, artTeacher, 0);
 }
 
 int main(void)
 {
     int i;
-    printf("please input numbers of students: ");
+    printf("please input numbers of students that need help: ");
     scanf("%d", &stuNum);
     stuID = (int *)malloc(sizeof(int) * stuNum);
     students = (pthread_t *)malloc(sizeof(pthread_t) * stuNum);
