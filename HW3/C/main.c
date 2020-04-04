@@ -7,12 +7,12 @@
 #include <unistd.h>
 
 int finished = 0;
-sem_t waking_teacher;
-sem_t request_teacher_help;
-sem_t occupy_seat;
-sem_t get_chance;
-int total_stu_number;
-int *student_id;
+sem_t walTeacher;
+sem_t requestHelp;
+sem_t occupy;
+sem_t getChance;
+int stuNum;
+int *stuID;
 
 pthread_t teacher;
 pthread_t *students;
@@ -20,18 +20,15 @@ pthread_t *students;
 
 void *teacher_loop(void *param)
 {
-    /* seed random generator */
     srand((unsigned)time(NULL));
-
     while (!finished) {
         printf("teacher is sleeping\n");
-        /* wake up the teacher*/
-        sem_wait(&waking_teacher);
+        sem_wait(&walTeacher);
         if (!finished) {
             printf("teacher help student\n");
             sleep(rand()%2+1);
             printf("teacher now is free\n");
-            sem_post(&request_teacher_help);
+            sem_post(&requestHelp);
         }
         else {
             printf("finish helping all students\n");
@@ -47,39 +44,39 @@ void* student_loop(void *param)
     srand(time(NULL));
 
     while (times_through_loop < 1) {
-        sem_wait(&occupy_seat);
+        sem_wait(&occupy);
         printf("Student %d takes a seat\n",*lnumber);
 
-        sem_wait(&get_chance);
-        sem_post(&occupy_seat);
+        sem_wait(&getChance);
+        sem_post(&occupy);
         printf("Student %d waking the teacher.\n",*lnumber);
-        sem_post(&waking_teacher);
+        sem_post(&walTeacher);
         printf("Student %d receiving help\n",*lnumber);
-        sem_wait(&request_teacher_help);
-        sem_post(&get_chance);
+        sem_wait(&requestHelp);
+        sem_post(&getChance);
 
         ++times_through_loop;
     }
     return NULL;
 }
 
-void initilize()
+void init()
 {
     int i;
-    for (i = 0; i < total_stu_number; i++)
-        student_id[i] = i;
-    sem_init(&waking_teacher, 0, 0);
-    sem_init(&request_teacher_help, 0, 0);
-    sem_init(&occupy_seat, 0, 3);
-    sem_init(&get_chance, 0, 1);
+    for (i = 0; i < stuNum; i++)
+        stuID[i] = i;
+    sem_init(&walTeacher, 0, 0);
+    sem_init(&requestHelp, 0, 0);
+    sem_init(&occupy, 0, 3);
+    sem_init(&getChance, 0, 1);
 
 }
 
 void create_student_pthreads()
 {
     int i;
-    for (i = 0; i < total_stu_number; i++) {
-        pthread_create(&students[i], 0, student_loop, (void *)&student_id[i]);
+    for (i = 0; i < stuNum; i++) {
+        pthread_create(&students[i], 0, student_loop, (void *)&stuID[i]);
     }
 }
 
@@ -92,20 +89,20 @@ int main(void)
 {
     int i;
     printf("please input numbers of students: ");
-    scanf("%d", &total_stu_number);
-    student_id = (int *)malloc(sizeof(int)*total_stu_number);
-    students = (pthread_t *)malloc(sizeof(pthread_t)*total_stu_number);
-    initilize();
+    scanf("%d", &stuNum);
+    stuID = (int *)malloc(sizeof(int) * stuNum);
+    students = (pthread_t *)malloc(sizeof(pthread_t) * stuNum);
+    init();
     create_teacher_pthread();
     create_student_pthreads();
-    for (i = 0; i < total_stu_number; i++)
+    for (i = 0; i < stuNum; i++)
         pthread_join(students[i], NULL);
     finished = 1;
     printf("finished\n");
     // delete teacher pthread
     if (pthread_cancel(teacher) != 0)
         printf("error 2 %s\n",strerror(errno));
-    free(student_id);
+    free(stuID);
     free(students);
 
     return 0;
