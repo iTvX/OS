@@ -1,0 +1,2 @@
+compile command: gcc lru.c queue.c clock.c main.c -o page_replacement 
+run command: ./page_replacement 
